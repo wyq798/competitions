@@ -1,6 +1,25 @@
-#核心思想： 对于加减乘法而言，每一位上的值都可以先直接先加减乘然后再用%10保留该位的数，//10保留下一位的值
-"""有几个问题：1.怎么解决乘法溢出问题
-              2.除法及其他运算怎么解决
-              3.各个位置的数用高进制能否存储的更好
-              4,怎么让存储空间少占用点"""
+# 和小学的加法运算一样，先加再进位 
+def add(a1,a2):
+    array = []
+    s = 0
+
+    while a1!=[] and a2!=[] or s!=0:
+        m = a1.pop() if a1!=[] else 0
+        n = a2.pop() if a2!=[] else 0
+        array.append(str((m+n+s)%10))
+        s = (m+n+s)//10    # 减法只需要把m+n写成m-n
+    if a1 != []:
+        array.extend(str(a1[::-1]))
+    if a2 != []:
+        array.extend(a2[::-1])
+    array = [str(x) for x in array[::-1]]
+    return ''.join(array)
+
+if __name__ == '__main__':
+    s1 = input()
+    s2 = input()
+    s1 = [int(x) for x in s1]
+    s2 = [int(x) for x in s2]
+    print(add(s1,s2))
+
               
